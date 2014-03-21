@@ -13,7 +13,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class PrintableWoodTest {
-	String str1="✿✿✿✿✿✿✿✿✿\r\n✿○○○○○✿✖✿\r\n✿✿✿✿✿○✿○✿\r\n✿○○○✿○✿○✿\r\n✿○✿○○○✿○✿\r\n✿○✿✿✿✿✿○✿\r\n✿○○○○○○♥✿\r\n✿✿✿✿✿✿✿✿✿\r\n♥ - life\r\n✖  - death";
 
 	@Test
 	public void testPrintWood() throws IOException, CodeException { //print wood
@@ -45,6 +44,7 @@ public class PrintableWoodTest {
 		PrintableWoodLoader W=new PrintableWoodLoader();
 		PrintableWood wood=W.PrintableWoodLoad(instream,outstream);
 		wood.createWoodman("Billy", new Point(4, 1));
+		wood.PrintWood();
 		String s ="✿✿✿✿✿✿✿✿✿\r\n" +
 				  "✿○○○B○✿✖✿\r\n" +
 				  "✿✿✿✿✿○✿○✿\r\n" +
@@ -68,6 +68,7 @@ public class PrintableWoodTest {
 		PrintableWoodLoader W=new PrintableWoodLoader();
 		PrintableWood wood=W.PrintableWoodLoad(instream,outstream);
 		wood.createWoodman("Vincent", new Point(0, 0));
+		wood.PrintWood();
 	}
 
 	@Test
@@ -78,6 +79,7 @@ public class PrintableWoodTest {
 		PrintableWoodLoader W=new PrintableWoodLoader();
 		PrintableWood wood=W.PrintableWoodLoad(instream,outstream);
 		wood.createWoodman("Molly", new Point(7, 1));
+		wood.PrintWood();
 		String s="✿✿✿✿✿✿✿✿✿\r\n" +
 				 "✿○○○○○✿M✿\r\n" +
 				 "✿✿✿✿✿○✿○✿\r\n" +
@@ -101,6 +103,7 @@ public class PrintableWoodTest {
 		PrintableWoodLoader W=new PrintableWoodLoader();
 		PrintableWood wood=W.PrintableWoodLoad(instream,outstream);
 		wood.createWoodman("Chris", new Point(7, 6));
+		wood.PrintWood();
 		String s="✿✿✿✿✿✿✿✿✿\r\n" +
 				 "✿○○○○○✿✖✿\r\n" +
 				 "✿✿✿✿✿○✿○✿\r\n" +
@@ -171,13 +174,13 @@ public class PrintableWoodTest {
 		ByteArrayOutputStream outstream = new ByteArrayOutputStream();
 		PrintableWoodLoader W=new PrintableWoodLoader();
 		PrintableWood wood=W.PrintableWoodLoad(instream,outstream);
-		wood.createWoodman("Dorian", new Point(3, 4));
+		wood.createWoodman("Dorian", new Point(5, 4));
 		wood.move("Dorian", Direction.Left);	
 		String s="✿✿✿✿✿✿✿✿✿\r\n" +
 				 "✿○○○○○✿✖✿\r\n" +
 				 "✿✿✿✿✿○✿○✿\r\n" +
 				 "✿○○○✿○✿○✿\r\n" +
-				 "✿○D○✿○✿○✿\r\n" +
+				 "✿○✿○D○✿○✿\r\n" +
 				 "✿○✿✿✿✿✿○✿\r\n" +
 				 "✿○○○○○○♥✿\r\n" +
 				 "✿✿✿✿✿✿✿✿✿\r\n" +	
