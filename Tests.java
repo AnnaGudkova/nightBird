@@ -1,4 +1,7 @@
 import static org.junit.Assert.*;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -6,89 +9,182 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import org.junit.Before;
 import org.junit.Test;
 
 public class PrintableWoodTest {
-	//тесты не доделаны,пока только вывод на консоль
-	
 	String str1="✿✿✿✿✿✿✿✿✿\r\n✿○○○○○✿✖✿\r\n✿✿✿✿✿○✿○✿\r\n✿○○○✿○✿○✿\r\n✿○✿○○○✿○✿\r\n✿○✿✿✿✿✿○✿\r\n✿○○○○○○♥✿\r\n✿✿✿✿✿✿✿✿✿\r\n♥ - life\r\n✖  - death";
-	
+
 	@Test
-	public void testPrintWood1() throws IOException, CodeException { //wood
+	public void testPrintWood() throws IOException, CodeException { //print wood
 		File file=new File("world.txt");
 		InputStream instream=new FileInputStream(file);
-		File file2=new File("out.txt");
-		OutputStream outstream=new FileOutputStream(file2);
+		ByteArrayOutputStream outstream = new ByteArrayOutputStream();
 		PrintableWoodLoader W=new PrintableWoodLoader();
 		PrintableWood wood=W.PrintableWoodLoad(instream,outstream);
-	    wood.PrintWood();
+		wood.PrintWood();
+		String s="✿✿✿✿✿✿✿✿✿\r\n" +
+				 "✿○○○○○✿✖✿\r\n" +
+				 "✿✿✿✿✿○✿○✿\r\n" +
+				 "✿○○○✿○✿○✿\r\n" +
+				 "✿○✿○○○✿○✿\r\n" +
+				 "✿○✿✿✿✿✿○✿\r\n" +
+				 "✿○○○○○○♥✿\r\n" +
+				 "✿✿✿✿✿✿✿✿✿\r\n" +	
+				 "\r\n" +
+				 "♥ - life\r\n" +
+				 "✖ - death\r\n" ;
+		assertEquals(s, outstream.toString());
+	}
+	
+	@Test
+	public void testCreateWoodman1() throws IOException, CodeException { //createWoodman on a space
+		File file=new File("world.txt");
+		InputStream instream=new FileInputStream(file);
+		ByteArrayOutputStream outstream = new ByteArrayOutputStream();
+		PrintableWoodLoader W=new PrintableWoodLoader();
+		PrintableWood wood=W.PrintableWoodLoad(instream,outstream);
+		wood.createWoodman("Billy", new Point(4, 1));
+		String s ="✿✿✿✿✿✿✿✿✿\r\n" +
+				  "✿○○○B○✿✖✿\r\n" +
+				  "✿✿✿✿✿○✿○✿\r\n" +
+				  "✿○○○✿○✿○✿\r\n" +
+				  "✿○✿○○○✿○✿\r\n" +
+				  "✿○✿✿✿✿✿○✿\r\n" +
+				  "✿○○○○○○♥✿\r\n" +
+				  "✿✿✿✿✿✿✿✿✿\r\n" +	
+				  "\r\n" +
+				  "♥ - life\r\n" +
+				  "✖ - death\r\n" +
+				  "B - Billy(3 lives)\r\n";
+		assertEquals(s, outstream.toString());
+	}
+
+	@Test(expected=CodeException.class)
+	public void testException() throws IOException, CodeException { //createWoodman on a wall
+		File file=new File("world.txt");
+		InputStream instream=new FileInputStream(file);
+		ByteArrayOutputStream outstream = new ByteArrayOutputStream();
+		PrintableWoodLoader W=new PrintableWoodLoader();
+		PrintableWood wood=W.PrintableWoodLoad(instream,outstream);
+		wood.createWoodman("Vincent", new Point(0, 0));
 	}
 
 	@Test
-	public void testPrintWood2() throws IOException, CodeException { //trap
+	public void testCreateWoodman2() throws IOException, CodeException { //createWoodman on a trap
 		File file=new File("world.txt");
 		InputStream instream=new FileInputStream(file);
-		File file2=new File("out.txt");
-		OutputStream outstream=new FileOutputStream(file2);
+		ByteArrayOutputStream outstream = new ByteArrayOutputStream();
 		PrintableWoodLoader W=new PrintableWoodLoader();
 		PrintableWood wood=W.PrintableWoodLoad(instream,outstream);
-		wood.createWoodman("Billy", new Point(7, 1));
-		wood.move("Billy", Direction.Down);	
+		wood.createWoodman("Molly", new Point(7, 1));
+		String s="✿✿✿✿✿✿✿✿✿\r\n" +
+				 "✿○○○○○✿M✿\r\n" +
+				 "✿✿✿✿✿○✿○✿\r\n" +
+				 "✿○○○✿○✿○✿\r\n" +
+				 "✿○✿○○○✿○✿\r\n" +
+				 "✿○✿✿✿✿✿○✿\r\n" +
+				 "✿○○○○○○♥✿\r\n" +
+				 "✿✿✿✿✿✿✿✿✿\r\n" +	
+				 "\r\n" +
+				 "♥ - life\r\n" +
+				 "✖ - death\r\n" +
+				 "M - Molly(3 lives)\r\n";	
+		assertEquals(s, outstream.toString());
 	}
-	
+
 	@Test
-	public void testPrintWood3() throws IOException, CodeException {  //life
+	public void testCreateWoodman3() throws IOException, CodeException {  //createWoodman on a life
 		File file=new File("world.txt");
 		InputStream instream=new FileInputStream(file);
-		File file2=new File("out.txt");
-		OutputStream outstream=new FileOutputStream(file2);
+		ByteArrayOutputStream outstream = new ByteArrayOutputStream();
 		PrintableWoodLoader W=new PrintableWoodLoader();
 		PrintableWood wood=W.PrintableWoodLoad(instream,outstream);
 		wood.createWoodman("Chris", new Point(7, 6));
-		wood.move("Chris", Direction.Up);	
+		String s="✿✿✿✿✿✿✿✿✿\r\n" +
+				 "✿○○○○○✿✖✿\r\n" +
+				 "✿✿✿✿✿○✿○✿\r\n" +
+				 "✿○○○✿○✿○✿\r\n" +
+				 "✿○✿○○○✿○✿\r\n" +
+				 "✿○✿✿✿✿✿○✿\r\n" +
+				 "✿○○○○○○C✿\r\n" +
+				 "✿✿✿✿✿✿✿✿✿\r\n" +	
+				 "\r\n" +
+				 "♥ - life\r\n" +
+				 "✖ - death\r\n" +
+				 "C - Chris(3 lives)\r\n";
+		assertEquals(s, outstream.toString());
 	}
-	
+
 	@Test
-	public void testPrintWood4() throws IOException, CodeException { //increase lives
+	public void testIncreaseLives() throws IOException, CodeException { //increase woodman's lives
 		File file=new File("world.txt");
 		InputStream instream=new FileInputStream(file);
-		File file2=new File("out.txt");
-		OutputStream outstream=new FileOutputStream(file2);
+		ByteArrayOutputStream outstream = new ByteArrayOutputStream();
 		PrintableWoodLoader W=new PrintableWoodLoader();
 		PrintableWood wood=W.PrintableWoodLoad(instream,outstream);
 		wood.createWoodman("Alex", new Point(7, 6));
 		wood.move("Alex",  Direction.Right);
-		wood.move("Alex",  Direction.Right);
-		wood.move("Alex",  Direction.Right);
-		wood.move("Alex",  Direction.Right);
+		String s="✿✿✿✿✿✿✿✿✿\r\n" +
+				 "✿○○○○○✿✖✿\r\n" +
+				 "✿✿✿✿✿○✿○✿\r\n" +
+				 "✿○○○✿○✿○✿\r\n" +
+				 "✿○✿○○○✿○✿\r\n" +
+				 "✿○✿✿✿✿✿○✿\r\n" +
+				 "✿○○○○○○A✿\r\n" +
+				 "✿✿✿✿✿✿✿✿✿\r\n" +	
+				 "\r\n" +
+				 "♥ - life\r\n" +
+				 "✖ - death\r\n" +
+				 "A - Alex(4 lives)\r\n";				
+		assertEquals(s, outstream.toString());
 	}
-	
+
 	@Test
-	public void testPrintWood5() throws IOException, CodeException { //decrease your lives
+	public void testDecreaseLives() throws IOException, CodeException { //decrease woodman's lives
 		File file=new File("world.txt");
 		InputStream instream=new FileInputStream(file);
-		File file2=new File("out.txt");
-		OutputStream outstream=new FileOutputStream(file2);
+		ByteArrayOutputStream outstream = new ByteArrayOutputStream();
 		PrintableWoodLoader W=new PrintableWoodLoader();
 		PrintableWood wood=W.PrintableWoodLoad(instream,outstream);
-		wood.createWoodman("Billy", new Point(7, 1));
-		wood.move("Billy", Direction.Down);	
-		wood.move("Billy", Direction.Up);
-		wood.move("Billy", Direction.Down);	
-		wood.move("Billy", Direction.Up);
-		wood.move("Billy", Direction.Down);	
-		wood.move("Billy", Direction.Up);
+		wood.createWoodman("Jane", new Point(7, 1));
+		wood.move("Jane", Direction.Up);	
+		String s="✿✿✿✿✿✿✿✿✿\r\n" +
+				 "✿○○○○○✿J✿\r\n" +
+				 "✿✿✿✿✿○✿○✿\r\n" +
+				 "✿○○○✿○✿○✿\r\n" +
+				 "✿○✿○○○✿○✿\r\n" +
+				 "✿○✿✿✿✿✿○✿\r\n" +
+				 "✿○○○○○○♥✿\r\n" +
+				 "✿✿✿✿✿✿✿✿✿\r\n" +	
+				 "\r\n" +
+				 "♥ - life\r\n" +
+				 "✖ - death\r\n" +
+				 "J - Jane(2 lives)\r\n";	
+		assertEquals(s, outstream.toString());		
 	}
-	
+
 	@Test
-	public void testPrintWood6() throws IOException, CodeException { //space
+	public void testMove() throws IOException, CodeException { //simply move
 		File file=new File("world.txt");
 		InputStream instream=new FileInputStream(file);
-		File file2=new File("out.txt");
-		OutputStream outstream=new FileOutputStream(file2);
+		ByteArrayOutputStream outstream = new ByteArrayOutputStream();
 		PrintableWoodLoader W=new PrintableWoodLoader();
 		PrintableWood wood=W.PrintableWoodLoad(instream,outstream);
-		wood.createWoodman("Vincent", new Point(2, 1));
+		wood.createWoodman("Dorian", new Point(3, 4));
+		wood.move("Dorian", Direction.Left);	
+		String s="✿✿✿✿✿✿✿✿✿\r\n" +
+				 "✿○○○○○✿✖✿\r\n" +
+				 "✿✿✿✿✿○✿○✿\r\n" +
+				 "✿○○○✿○✿○✿\r\n" +
+				 "✿○D○✿○✿○✿\r\n" +
+				 "✿○✿✿✿✿✿○✿\r\n" +
+				 "✿○○○○○○♥✿\r\n" +
+				 "✿✿✿✿✿✿✿✿✿\r\n" +	
+				 "\r\n" +
+				 "♥ - life\r\n" +
+				 "✖ - death\r\n" +
+				 "D - Dorian(3 lives)\r\n";	
+		assertEquals(s, outstream.toString());		
 	}
-	
 }
