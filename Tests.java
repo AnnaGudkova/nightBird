@@ -22,7 +22,7 @@ public class PrintableWoodTest {
 		PrintableWoodLoader W=new PrintableWoodLoader();
 		PrintableWood wood=W.PrintableWoodLoad(instream,outstream);
 		wood.PrintWood();
-		String s="✿✿✿✿✿✿✿✿✿\r\n" +
+		String s=        "✿✿✿✿✿✿✿✿✿\r\n" +
 				 "✿○○○○○✿✖✿\r\n" +
 				 "✿✿✿✿✿○✿○✿\r\n" +
 				 "✿○○○✿○✿○✿\r\n" +
@@ -45,7 +45,7 @@ public class PrintableWoodTest {
 		PrintableWood wood=W.PrintableWoodLoad(instream,outstream);
 		wood.createWoodman("Billy", new Point(4, 1));
 		wood.PrintWood();
-		String s ="✿✿✿✿✿✿✿✿✿\r\n" +
+		String s =        "✿✿✿✿✿✿✿✿✿\r\n" +
 				  "✿○○○B○✿✖✿\r\n" +
 				  "✿✿✿✿✿○✿○✿\r\n" +
 				  "✿○○○✿○✿○✿\r\n" +
@@ -80,7 +80,7 @@ public class PrintableWoodTest {
 		PrintableWood wood=W.PrintableWoodLoad(instream,outstream);
 		wood.createWoodman("Molly", new Point(7, 1));
 		wood.PrintWood();
-		String s="✿✿✿✿✿✿✿✿✿\r\n" +
+		String s=        "✿✿✿✿✿✿✿✿✿\r\n" +
 				 "✿○○○○○✿M✿\r\n" +
 				 "✿✿✿✿✿○✿○✿\r\n" +
 				 "✿○○○✿○✿○✿\r\n" +
@@ -104,7 +104,7 @@ public class PrintableWoodTest {
 		PrintableWood wood=W.PrintableWoodLoad(instream,outstream);
 		wood.createWoodman("Chris", new Point(7, 6));
 		wood.PrintWood();
-		String s="✿✿✿✿✿✿✿✿✿\r\n" +
+		String s=        "✿✿✿✿✿✿✿✿✿\r\n" +
 				 "✿○○○○○✿✖✿\r\n" +
 				 "✿✿✿✿✿○✿○✿\r\n" +
 				 "✿○○○✿○✿○✿\r\n" +
@@ -128,7 +128,7 @@ public class PrintableWoodTest {
 		PrintableWood wood=W.PrintableWoodLoad(instream,outstream);
 		wood.createWoodman("Alex", new Point(7, 6));
 		wood.move("Alex",  Direction.Right);
-		String s="✿✿✿✿✿✿✿✿✿\r\n" +
+		String s=        "✿✿✿✿✿✿✿✿✿\r\n" +
 				 "✿○○○○○✿✖✿\r\n" +
 				 "✿✿✿✿✿○✿○✿\r\n" +
 				 "✿○○○✿○✿○✿\r\n" +
@@ -152,7 +152,7 @@ public class PrintableWoodTest {
 		PrintableWood wood=W.PrintableWoodLoad(instream,outstream);
 		wood.createWoodman("Jane", new Point(7, 1));
 		wood.move("Jane", Direction.Up);	
-		String s="✿✿✿✿✿✿✿✿✿\r\n" +
+		String s=        "✿✿✿✿✿✿✿✿✿\r\n" +
 				 "✿○○○○○✿J✿\r\n" +
 				 "✿✿✿✿✿○✿○✿\r\n" +
 				 "✿○○○✿○✿○✿\r\n" +
@@ -176,7 +176,7 @@ public class PrintableWoodTest {
 		PrintableWood wood=W.PrintableWoodLoad(instream,outstream);
 		wood.createWoodman("Dorian", new Point(5, 4));
 		wood.move("Dorian", Direction.Left);	
-		String s="✿✿✿✿✿✿✿✿✿\r\n" +
+		String s=        "✿✿✿✿✿✿✿✿✿\r\n" +
 				 "✿○○○○○✿✖✿\r\n" +
 				 "✿✿✿✿✿○✿○✿\r\n" +
 				 "✿○○○✿○✿○✿\r\n" +
