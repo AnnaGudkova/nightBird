@@ -5,12 +5,17 @@ import java.util.List;
 import java.util.Scanner;
 
 public class MyWoodLoader implements WoodLoader {
-
+	List<String> list = new LinkedList<String>();
+	
 	public Wood Load(InputStream stream) throws IOException, CodeException {
+		return new MyWood(getWood(stream));
+	}
+	
+	public char[][] getWood(InputStream stream) throws CodeException{
 		int n = 0;
 		int m = 0;
 		char[][] m_wood;
-		List<String> list = new LinkedList<String>();
+		
 		Scanner sc = new Scanner(stream);
 		try {
 				if (!sc.hasNextLine()) throw new CodeException("File is empty");
@@ -32,6 +37,7 @@ public class MyWoodLoader implements WoodLoader {
 		} finally {
 			sc.close();
 		}
-		return new MyWood(m_wood);
+		
+		return m_wood;
 	}
 }
